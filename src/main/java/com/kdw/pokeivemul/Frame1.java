@@ -54,7 +54,7 @@ public class Frame1 extends JFrame{
 			panel1.setLayout(new FlowLayout());
 			
 			comboBox1 = new JComboBox<String>();
-			comboBox1.addItem("¼±ÅÃ");
+			comboBox1.addItem("ì„ íƒ");
 			for(IndividualValueVo vo : list) {
 				comboBox1.addItem(vo.getName());
 			}
@@ -75,12 +75,12 @@ public class Frame1 extends JFrame{
 						textField6.setText(String.valueOf(vo.getS()));
 						
 						textArea1.setText("");
-						textArea1.append("Ã¼·Â(H) : " + vo.getH() + "\n");
-						textArea1.append("°ø°İ(A) : " + vo.getA() + "\n");
-						textArea1.append("¹æ¾î(B) : " + vo.getB() + "\n");
-						textArea1.append("Æ¯¼ö°ø°İ(C) : " + vo.getC() + "\n");
-						textArea1.append("Æ¯¼ö¹æ¾î(D) : " + vo.getD() + "\n");
-						textArea1.append("½ºÇÇµå(S) : " + vo.getS() + "\n");
+						textArea1.append("ì²´ë ¥(H) : " + vo.getH() + "\n");
+						textArea1.append("ê³µê²©(A) : " + vo.getA() + "\n");
+						textArea1.append("ë°©ì–´(B) : " + vo.getB() + "\n");
+						textArea1.append("íŠ¹ìˆ˜ê³µê²©(C) : " + vo.getC() + "\n");
+						textArea1.append("íŠ¹ìˆ˜ë°©ì–´(D) : " + vo.getD() + "\n");
+						textArea1.append("ìŠ¤í”¼ë“œ(S) : " + vo.getS() + "\n");
 					}else {
 						textField1.setText("0");
 						textField2.setText("0");
@@ -127,14 +127,14 @@ public class Frame1 extends JFrame{
 			
 			panel2 = new JPanel();
 			panel2.setSize(500, 500);
-			textArea1 = new JTextArea("ÄŞº¸¹Ú½º¸¦ ¼±ÅÃÇÏ¼¼¿ä.", 25, 35);
+			textArea1 = new JTextArea("ì½¤ë³´ë°•ìŠ¤ë¥¼ ì„ íƒí•˜ì„¸ìš”.", 25, 35);
 			panel2.add(textArea1);
 			this.add(panel2);
 			
 			panel3 = new JPanel();
 			panel3.setSize(500, 300);
 			frame2 = new Frame2();
-			button1 = new JButton("½ºÇÇµå ºü¸¥¼ø");
+			button1 = new JButton("ìŠ¤í”¼ë“œ ë¹ ë¥¸ìˆœ");
 			button1.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					frame2.setVisible(true);

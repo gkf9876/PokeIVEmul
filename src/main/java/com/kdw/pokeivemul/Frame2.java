@@ -35,7 +35,7 @@ public class Frame2 extends JFrame{
 
 	public Frame2() {
 		try {
-			this.setTitle("½ºÇÇµå ºü¸¥ ¼ø");
+			this.setTitle("ìŠ¤í”¼ë“œ ë¹ ë¥¸ ìˆœ");
 			this.setSize(500, 600);
 			this.setLayout(new FlowLayout(FlowLayout.LEFT));
 			
