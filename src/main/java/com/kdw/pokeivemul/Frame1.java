@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import com.kdw.pokeivemul.IndividualValue.dao.impl.IndividualValueDaoImpl;
+import com.kdw.pokeivemul.IndividualValue.service.IndividualValueService;
 import com.kdw.pokeivemul.IndividualValue.vo.IndividualValueVo;
 
 public class Frame1 extends JFrame{
@@ -45,8 +45,9 @@ public class Frame1 extends JFrame{
 			this.setSize(500, 600);
 			this.setLayout(new FlowLayout(FlowLayout.CENTER));
 			
-			IndividualValueDaoImpl dao = new IndividualValueDaoImpl();
-			list = dao.selectList("NAME", "ASC");
+			IndividualValueService service = new IndividualValueService();
+			IndividualValueVo individualValueVo = new IndividualValueVo();
+			list = service.selectList(individualValueVo);
 			
 			
 			panel1 = new JPanel();

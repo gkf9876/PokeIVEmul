@@ -1,6 +1,8 @@
 package com.kdw.pokeivemul.IndividualValue.vo;
 
 public class IndividualValueVo {
+	private int seq;
+	private int number;
 	private String name;
 	private int H;
 	private int A;
@@ -8,6 +10,18 @@ public class IndividualValueVo {
 	private int C;
 	private int D;
 	private int S;
+	public int getSeq() {
+		return seq;
+	}
+	public void setSeq(int seq) {
+		this.seq = seq;
+	}
+	public int getNumber() {
+		return number;
+	}
+	public void setNumber(int number) {
+		this.number = number;
+	}
 	public String getName() {
 		return name;
 	}
