@@ -12,8 +12,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import com.kdw.pokeivemul.IndividualValue.service.IndividualValueService;
-import com.kdw.pokeivemul.IndividualValue.vo.IndividualValueVo;
+import com.kdw.pokeivemul.baseStats.service.BaseStatsService;
+import com.kdw.pokeivemul.baseStats.vo.BaseStatsVo;
 
 public class Frame2 extends JFrame{
 
@@ -31,7 +31,7 @@ public class Frame2 extends JFrame{
 	private JTextField textField6;
 	private JTextField textField7;
 	
-	private List<IndividualValueVo> list;
+	private List<BaseStatsVo> list;
 
 	public Frame2() {
 		try {
@@ -39,14 +39,14 @@ public class Frame2 extends JFrame{
 			this.setSize(500, 600);
 			this.setLayout(new FlowLayout(FlowLayout.LEFT));
 			
-			IndividualValueService service = new IndividualValueService();
-			IndividualValueVo individualValueVo = new IndividualValueVo();
+			BaseStatsService service = new BaseStatsService();
+			BaseStatsVo individualValueVo = new BaseStatsVo();
 			list = service.selectList(individualValueVo);
 			
 			panel1 = new JPanel();
 			//panel1.setPreferredSize(new Dimension(500, 600));
 			panel1.setLayout(new BoxLayout(panel1, BoxLayout.Y_AXIS));
-			for(IndividualValueVo vo : list) {
+			for(BaseStatsVo vo : list) {
 				JPanel panel = new JPanel();
 				panel.setLayout(new FlowLayout(FlowLayout.LEFT));
 				

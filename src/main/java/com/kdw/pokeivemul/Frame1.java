@@ -15,10 +15,13 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import com.kdw.pokeivemul.IndividualValue.service.IndividualValueService;
-import com.kdw.pokeivemul.IndividualValue.vo.IndividualValueVo;
+import com.kdw.pokeivemul.EVs.vo.EVsVo;
+import com.kdw.pokeivemul.IndividualValues.vo.IndividualValuesVo;
 import com.kdw.pokeivemul.Nature.service.NatureService;
 import com.kdw.pokeivemul.Nature.vo.NatureVo;
+import com.kdw.pokeivemul.baseStats.service.BaseStatsService;
+import com.kdw.pokeivemul.baseStats.vo.BaseStatsVo;
+import com.kdw.pokeivemul.monster.Monster;
 
 public class Frame1 extends JFrame{
 
@@ -73,7 +76,7 @@ public class Frame1 extends JFrame{
 	//실능치 계산 버튼
 	private JButton button2;
 	
-	private List<IndividualValueVo> list;
+	private List<BaseStatsVo> list;
 	private List<NatureVo> natureList;
 	
 	public Frame1() {
@@ -83,8 +86,8 @@ public class Frame1 extends JFrame{
 			this.setSize(500, 670);
 			this.setLayout(new FlowLayout(FlowLayout.CENTER));
 			
-			IndividualValueService service = new IndividualValueService();
-			IndividualValueVo individualValueVo = new IndividualValueVo();
+			BaseStatsService service = new BaseStatsService();
+			BaseStatsVo individualValueVo = new BaseStatsVo();
 			list = service.selectList(individualValueVo);
 			
 			
@@ -95,7 +98,7 @@ public class Frame1 extends JFrame{
 			comboBox1 = new JComboBox<String>();
 			comboBox1.setPreferredSize(new Dimension(400, 20));
 			comboBox1.addItem("선택");
-			for(IndividualValueVo vo : list) {
+			for(BaseStatsVo vo : list) {
 				comboBox1.addItem(vo.getName());
 			}
 			
@@ -106,7 +109,7 @@ public class Frame1 extends JFrame{
 					String name = (String)cb.getSelectedItem();
 					
 					if(index > 0) {
-						IndividualValueVo vo = list.get(index - 1);
+						BaseStatsVo vo = list.get(index - 1);
 						textField1.setText(String.valueOf(vo.getH()));
 						textField2.setText(String.valueOf(vo.getA()));
 						textField3.setText(String.valueOf(vo.getB()));
@@ -293,48 +296,61 @@ public class Frame1 extends JFrame{
 					String natureName = (String)comboBox2.getSelectedItem();
 					
 					if(index > 0 && index2 > 0) {
-						IndividualValueVo vo = list.get(index - 1);
+						//종족값
+						BaseStatsVo baseStatsVo = list.get(index - 1);
+						
+						//성격
 						NatureVo natureVo = natureList.get(index2 - 1);
 						
-						textField1.setText(String.valueOf(vo.getH()));
-						textField2.setText(String.valueOf(vo.getA()));
-						textField3.setText(String.valueOf(vo.getB()));
-						textField4.setText(String.valueOf(vo.getC()));
-						textField5.setText(String.valueOf(vo.getD()));
-						textField6.setText(String.valueOf(vo.getS()));
+						//개체치
+						IndividualValuesVo individualValuesVo = new IndividualValuesVo();
+						individualValuesVo.setH(Integer.parseInt(textField11.getText()));
+						individualValuesVo.setA(Integer.parseInt(textField12.getText()));
+						individualValuesVo.setB(Integer.parseInt(textField13.getText()));
+						individualValuesVo.setC(Integer.parseInt(textField14.getText()));
+						individualValuesVo.setD(Integer.parseInt(textField15.getText()));
+						individualValuesVo.setS(Integer.parseInt(textField16.getText()));
+						
+						//노력치
+						EVsVo eVsVo = new EVsVo();
+						eVsVo.setH(Integer.parseInt(textField21.getText()));
+						eVsVo.setA(Integer.parseInt(textField22.getText()));
+						eVsVo.setB(Integer.parseInt(textField23.getText()));
+						eVsVo.setC(Integer.parseInt(textField24.getText()));
+						eVsVo.setD(Integer.parseInt(textField25.getText()));
+						eVsVo.setS(Integer.parseInt(textField26.getText()));
+						
+						textField1.setText(String.valueOf(baseStatsVo.getH()));
+						textField2.setText(String.valueOf(baseStatsVo.getA()));
+						textField3.setText(String.valueOf(baseStatsVo.getB()));
+						textField4.setText(String.valueOf(baseStatsVo.getC()));
+						textField5.setText(String.valueOf(baseStatsVo.getD()));
+						textField6.setText(String.valueOf(baseStatsVo.getS()));
 						
 						textArea1.setText("");
-						textArea1.append("체력(H) : " + vo.getH() + "\n");
-						textArea1.append("공격(A) : " + vo.getA() + "\n");
-						textArea1.append("방어(B) : " + vo.getB() + "\n");
-						textArea1.append("특수공격(C) : " + vo.getC() + "\n");
-						textArea1.append("특수방어(D) : " + vo.getD() + "\n");
-						textArea1.append("스피드(S) : " + vo.getS() + "\n");
+						textArea1.append("체력(H) : " + baseStatsVo.getH() + "\n");
+						textArea1.append("공격(A) : " + baseStatsVo.getA() + "\n");
+						textArea1.append("방어(B) : " + baseStatsVo.getB() + "\n");
+						textArea1.append("특수공격(C) : " + baseStatsVo.getC() + "\n");
+						textArea1.append("특수방어(D) : " + baseStatsVo.getD() + "\n");
+						textArea1.append("스피드(S) : " + baseStatsVo.getS() + "\n");
 						textArea1.append("\n\n");
 						
 						//실수치 계산
-						//체력 = 종족값 + (노력치 / 4 + 개체값) / 2 + 10 + Lv
-						int H = (int)Math.floor((vo.getH() + (Integer.parseInt(textField21.getText()) / 4 + Integer.parseInt(textField11.getText())) / 2 + 10 + 50));
+						Monster monster = new Monster(50, baseStatsVo, natureVo, individualValuesVo, eVsVo);
 						
-						//그외 = {종족값 + (노력치 / 4 + 개체값) / 2 + 5} * 성격보정
-						int A = (int)Math.floor((vo.getA() + (Integer.parseInt(textField22.getText()) / 4 + Integer.parseInt(textField12.getText())) / 2 + 5) * natureVo.getA());
-						int B = (int)Math.floor((vo.getB() + (Integer.parseInt(textField23.getText()) / 4 + Integer.parseInt(textField13.getText())) / 2 + 5) * natureVo.getB());
-						int C = (int)Math.floor((vo.getC() + (Integer.parseInt(textField24.getText()) / 4 + Integer.parseInt(textField14.getText())) / 2 + 5) * natureVo.getC());
-						int D = (int)Math.floor((vo.getD() + (Integer.parseInt(textField25.getText()) / 4 + Integer.parseInt(textField15.getText())) / 2 + 5) * natureVo.getD());
-						int S = (int)Math.floor((vo.getS() + (Integer.parseInt(textField26.getText()) / 4 + Integer.parseInt(textField16.getText())) / 2 + 5) * natureVo.getS());
-						
-						textArea1.append("실능 체력(H) : " + H + "\n");
-						textArea1.append("실능 공격(A) : " + A + "\n");
-						textArea1.append("실능 방어(B) : " + B + "\n");
-						textArea1.append("실능 특수공격(C) : " + C + "\n");
-						textArea1.append("실능 특수방어(D) : " + D + "\n");
-						textArea1.append("실능 스피드(S) : " + S + "\n");
+						textArea1.append("실능 체력(H) : " + monster.getH() + "\n");
+						textArea1.append("실능 공격(A) : " + monster.getA() + "\n");
+						textArea1.append("실능 방어(B) : " + monster.getB() + "\n");
+						textArea1.append("실능 특수공격(C) : " + monster.getC() + "\n");
+						textArea1.append("실능 특수방어(D) : " + monster.getD() + "\n");
+						textArea1.append("실능 스피드(S) : " + monster.getS() + "\n");
 						textArea1.append("\n\n");
 						
 						//결정력 계산
 						//자속 (실수치 * 1.5(자속) * 기술위력 * 랭크업 * 특성(천하장사)
-						double attackDamage = A * 1.5;
-						double specialAttackDamage = C * 1.5;
+						double attackDamage = monster.getA() * 1.5;
+						double specialAttackDamage = monster.getC() * 1.5;
 						
 						textArea1.append("@ 자속 공격 결정력\n");
 						textArea1.append("- 25 위력 : " + (int)Math.floor(attackDamage * 25) + "\n");
@@ -354,8 +370,8 @@ public class Frame1 extends JFrame{
 						
 						//내구력 계산
 						//(체력 실능 * (물리/특수 방어 실능) / 0.411
-						double stamina = H * B / 0.411;
-						double specialStamina = H * D / 0.411;
+						double stamina = monster.getH() * monster.getB() / 0.411;
+						double specialStamina = monster.getH() * monster.getD() / 0.411;
 						textArea1.append("@ 내구력 계산\n");
 						textArea1.append("- 물리 내구력 : " + (int)Math.floor(stamina) + "\n");
 						textArea1.append("- 특수 내구력 : " + (int)Math.floor(specialStamina) + "\n");

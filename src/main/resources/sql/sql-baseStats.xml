@@ -1,7 +1,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="individualValue">
-	<select id="selectList" parameterType="com.kdw.pokeivemul.IndividualValue.vo.IndividualValueVo" resultType="com.kdw.pokeivemul.IndividualValue.vo.IndividualValueVo">
-		/* individualValue.selectList */
+<mapper namespace="baseStats">
+	<select id="selectList" parameterType="com.kdw.pokeivemul.baseStats.vo.BaseStatsVo" resultType="com.kdw.pokeivemul.baseStats.vo.BaseStatsVo">
+		/* baseStats.selectList */
 		SELECT
 			SEQ
 			, NUMBER
@@ -13,7 +13,7 @@
 			, D
 			, S
 		FROM
-			TB_INDIVIDUAL_VALUE
+			TB_BASE_STATS
 		ORDER BY
 			NUMBER ASC, NAME ASC
     </select>
