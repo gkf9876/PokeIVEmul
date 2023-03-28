@@ -11,6 +11,9 @@
 	<bean id="individualValueDao" class="com.kdw.pokeivemul.IndividualValue.dao.impl.IndividualValueDaoImpl">
 		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>
 	</bean>
+	<bean id="natureDao" class="com.kdw.pokeivemul.Nature.dao.impl.NatureDaoImpl">
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>
+	</bean>
 	
     <!-- sqlSessionTemplate -->
     <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">

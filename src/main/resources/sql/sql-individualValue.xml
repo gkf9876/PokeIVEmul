@@ -3,10 +3,18 @@
 	<select id="selectList" parameterType="com.kdw.pokeivemul.IndividualValue.vo.IndividualValueVo" resultType="com.kdw.pokeivemul.IndividualValue.vo.IndividualValueVo">
 		/* individualValue.selectList */
 		SELECT
-			*
+			SEQ
+			, NUMBER
+			, NAME
+			, H
+			, A
+			, B
+			, C
+			, D
+			, S
 		FROM
 			TB_INDIVIDUAL_VALUE
 		ORDER BY
-			S DESC
+			NUMBER ASC, NAME ASC
     </select>
 </mapper>
