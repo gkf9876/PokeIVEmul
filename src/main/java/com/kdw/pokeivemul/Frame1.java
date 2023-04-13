@@ -348,33 +348,26 @@ public class Frame1 extends JFrame{
 						textArea1.append("\n\n");
 						
 						//결정력 계산
-						//자속 (실수치 * 1.5(자속) * 기술위력 * 랭크업 * 특성(천하장사)
-						double attackDamage = monster.getA() * 1.5;
-						double specialAttackDamage = monster.getC() * 1.5;
-						
 						textArea1.append("@ 자속 공격 결정력\n");
-						textArea1.append("- 25 위력 : " + (int)Math.floor(attackDamage * 25) + "\n");
-						textArea1.append("- 40 위력 : " + (int)Math.floor(attackDamage * 40) + "\n");
-						textArea1.append("- 60 위력 : " + (int)Math.floor(attackDamage * 60) + "\n");
-						textArea1.append("- 90 위력 : " + (int)Math.floor(attackDamage * 90) + "\n");
-						textArea1.append("- 120 위력 : " + (int)Math.floor(attackDamage * 120) + "\n");
+						textArea1.append("- 25 위력 : " + monster.getAttackDamage(25, true) + "\n");
+						textArea1.append("- 40 위력 : " + monster.getAttackDamage(40, true) + "\n");
+						textArea1.append("- 60 위력 : " + monster.getAttackDamage(60, true) + "\n");
+						textArea1.append("- 90 위력 : " + monster.getAttackDamage(90, true) + "\n");
+						textArea1.append("- 120 위력 : " + monster.getAttackDamage(120, true) + "\n");
 						textArea1.append("\n");
 						
 						textArea1.append("@ 자속 특수공격 결정력\n");
-						textArea1.append("- 25 위력 : " + (int)Math.floor(specialAttackDamage * 25) + "\n");
-						textArea1.append("- 40 위력 : " + (int)Math.floor(specialAttackDamage * 40) + "\n");
-						textArea1.append("- 60 위력 : " + (int)Math.floor(specialAttackDamage * 60) + "\n");
-						textArea1.append("- 90 위력 : " + (int)Math.floor(specialAttackDamage * 90) + "\n");
-						textArea1.append("- 120 위력 : " + (int)Math.floor(specialAttackDamage * 120) + "\n");
+						textArea1.append("- 25 위력 : " + monster.getSpecialAttackDamage(25, true) + "\n");
+						textArea1.append("- 40 위력 : " + monster.getSpecialAttackDamage(40, true) + "\n");
+						textArea1.append("- 60 위력 : " + monster.getSpecialAttackDamage(60, true) + "\n");
+						textArea1.append("- 90 위력 : " + monster.getSpecialAttackDamage(90, true) + "\n");
+						textArea1.append("- 120 위력 : " + monster.getSpecialAttackDamage(120, true) + "\n");
 						textArea1.append("\n\n");
 						
 						//내구력 계산
-						//(체력 실능 * (물리/특수 방어 실능) / 0.411
-						double stamina = monster.getH() * monster.getB() / 0.411;
-						double specialStamina = monster.getH() * monster.getD() / 0.411;
 						textArea1.append("@ 내구력 계산\n");
-						textArea1.append("- 물리 내구력 : " + (int)Math.floor(stamina) + "\n");
-						textArea1.append("- 특수 내구력 : " + (int)Math.floor(specialStamina) + "\n");
+						textArea1.append("- 물리 내구력 : " + monster.getStamina() + "(" + monster.getMinStamina() + " ~ " + monster.getMaxStamina() + ")\n");
+						textArea1.append("- 특수 내구력 : " + monster.getSpecialStamina() + "(" + monster.getMinSpecialStamina() + " ~ " + monster.getMaxSpecialStamina() + ")\n");
 					}else {
 						textField1.setText("0");
 						textField2.setText("0");
